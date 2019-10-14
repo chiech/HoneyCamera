@@ -1,9 +1,8 @@
-package com.xinlan.imageeditandroid;
+package com.xinlan.honey;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import android.content.Context;
 import android.graphics.Bitmap;

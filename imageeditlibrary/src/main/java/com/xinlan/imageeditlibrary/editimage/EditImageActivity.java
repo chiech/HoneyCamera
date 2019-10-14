@@ -13,9 +13,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -58,6 +60,7 @@ public class EditImageActivity extends BaseActivity {
 
     public static final String IMAGE_IS_EDIT = "image_is_edit";
 
+    public static final String MODE_ID = "mode_id";
     public static final int MODE_NONE = 0;
     public static final int MODE_STICKERS = 1;// 贴图模式
     public static final int MODE_FILTER = 2;// 滤镜模式
@@ -106,13 +109,16 @@ public class EditImageActivity extends BaseActivity {
 
     private RedoUndoController mRedoUndoController;//撤销操作
 
+    private static final String TAG = "EditImageActivity";
+
+
     /**
      * @param context
      * @param editImagePath
      * @param outputPath
      * @param requestCode
      */
-    public static void start(Activity context, final String editImagePath, final String outputPath, final int requestCode) {
+    public static void start(Activity context, final String editImagePath, final String outputPath, final int requestCode,final int id) {
         if (TextUtils.isEmpty(editImagePath)) {
             Toast.makeText(context, R.string.no_choose, Toast.LENGTH_SHORT).show();
             return;
@@ -121,22 +127,26 @@ public class EditImageActivity extends BaseActivity {
         Intent it = new Intent(context, EditImageActivity.class);
         it.putExtra(EditImageActivity.FILE_PATH, editImagePath);
         it.putExtra(EditImageActivity.EXTRA_OUTPUT, outputPath);
+        it.putExtra("ID",id);
         context.startActivityForResult(it, requestCode);
+        Log.d(TAG, "start: id is"+id);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         checkInitImageLoader();
-        setContentView(R.layout.activity_image_edit);
+        setContentView(R.layout.activity_image_edit2);
         initView();
         getData();
     }
 
     private void getData() {
         filePath = getIntent().getStringExtra(FILE_PATH);
+        mode = getIntent().getIntExtra("ID",0);
         saveFilePath = getIntent().getStringExtra(EXTRA_OUTPUT);// 保存图片路径
         loadImage(filePath);
+        Log.d(TAG, "getData: mode is "+ mode);
     }
 
     private void initView() {
@@ -167,6 +177,7 @@ public class EditImageActivity extends BaseActivity {
         mRotatePanel = (RotateImageView) findViewById(R.id.rotate_panel);
         mTextStickerView = (TextStickerView) findViewById(R.id.text_sticker_panel);
         mPaintView = (CustomPaintView) findViewById(R.id.custom_paint_view);
+        final ImageView editimage = (ImageView) findViewById(R.id.im_edit);
 
         // 底部gallery
         bottomGallery = (CustomViewPager) findViewById(R.id.bottom_gallery);

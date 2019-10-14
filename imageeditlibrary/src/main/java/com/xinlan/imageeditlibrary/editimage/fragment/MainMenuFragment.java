@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.xinlan.imageeditlibrary.R;
 import com.xinlan.imageeditlibrary.editimage.ModuleConfig;
 
@@ -20,7 +21,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     private View mainView;
 
     private View stickerBtn;// 贴图按钮
-    private View fliterBtn;// 滤镜按钮
+    //    private View fliterBtn;// 滤镜按钮
     private View cropBtn;// 剪裁按钮
     private View rotateBtn;// 旋转按钮
     private View mTextBtn;//文字型贴图添加
@@ -50,7 +51,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         super.onActivityCreated(savedInstanceState);
 
         stickerBtn = mainView.findViewById(R.id.btn_stickers);
-        fliterBtn = mainView.findViewById(R.id.btn_filter);
+//        fliterBtn = mainView.findViewById(R.id.btn_filter);
         cropBtn = mainView.findViewById(R.id.btn_crop);
         rotateBtn = mainView.findViewById(R.id.btn_rotate);
         mTextBtn = mainView.findViewById(R.id.btn_text);
@@ -58,7 +59,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         mBeautyBtn = mainView.findViewById(R.id.btn_beauty);
 
         stickerBtn.setOnClickListener(this);
-        fliterBtn.setOnClickListener(this);
+//        fliterBtn.setOnClickListener(this);
         cropBtn.setOnClickListener(this);
         rotateBtn.setOnClickListener(this);
         mTextBtn.setOnClickListener(this);
@@ -80,8 +81,8 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     public void onClick(View v) {
         if (v == stickerBtn) {
             onStickClick();
-        } else if (v == fliterBtn) {
-            onFilterClick();
+//        } else if (v == fliterBtn) {
+//            onFilterClick();
         } else if (v == cropBtn) {
             onCropClick();
         } else if (v == rotateBtn) {
@@ -90,7 +91,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
             onAddTextClick();
         } else if (v == mPaintBtn) {
             onPaintClick();
-        }else if(v == mBeautyBtn){
+        } else if (v == mBeautyBtn) {
             onBeautyClick();
         }
     }
@@ -153,7 +154,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
         activity.mPaintFragment.onShow();
     }
 
-    private void onBeautyClick(){
+    private void onBeautyClick() {
         activity.bottomGallery.setCurrentItem(BeautyFragment.INDEX);
         activity.mBeautyFragment.onShow();
     }
