@@ -134,15 +134,18 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
         activity.bottomGallery.setCurrentItem(MainMenuFragment.INDEX);
         activity.mainImage.setVisibility(View.VISIBLE);
         activity.bannerFlipper.showPrevious();
-
+        activity.isApply = false;
         this.mPaintView.setVisibility(View.GONE);
+        activity.isApply = false;
     }
 
     public void onShow() {
         activity.mode = EditImageActivity.MODE_PAINT;
         activity.mainImage.setImageBitmap(activity.getMainBit());
         activity.bannerFlipper.showNext();
+        activity.isApply = true;
         this.mPaintView.setVisibility(View.VISIBLE);
+        activity.isApply = true;
     }
 
     @Override
@@ -259,6 +262,7 @@ public class PaintFragment extends BaseEditFragment implements View.OnClickListe
 
         mSavePaintImageTask = new SaveCustomPaintTask(activity);
         mSavePaintImageTask.execute(activity.getMainBit());
+
     }
 
     @Override

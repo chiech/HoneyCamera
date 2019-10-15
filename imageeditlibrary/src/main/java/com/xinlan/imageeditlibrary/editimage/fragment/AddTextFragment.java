@@ -173,6 +173,7 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         activity.mainImage.setVisibility(View.VISIBLE);
         activity.bannerFlipper.showPrevious();
         mTextStickerView.setVisibility(View.GONE);
+        activity.isApply = false;
     }
 
     @Override
@@ -182,6 +183,7 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         activity.bannerFlipper.showNext();
         mTextStickerView.setVisibility(View.VISIBLE);
         mInputText.clearFocus();
+        activity.isApply = true;
     }
 
     /**
@@ -195,6 +197,7 @@ public class AddTextFragment extends BaseEditFragment implements TextWatcher {
         //启动任务
         mSaveTask = new SaveTextStickerTask(activity);
         mSaveTask.execute(activity.getMainBit());
+
     }
 
     /**

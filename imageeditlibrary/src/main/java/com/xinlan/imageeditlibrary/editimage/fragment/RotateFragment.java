@@ -84,6 +84,7 @@ public class RotateFragment extends BaseEditFragment {
         activity.mRotatePanel.reset();
         activity.mRotatePanel.setVisibility(View.VISIBLE);
         activity.bannerFlipper.showNext();
+        activity.isApply = true;
     }
 
     /**
@@ -132,6 +133,7 @@ public class RotateFragment extends BaseEditFragment {
         activity.mainImage.setVisibility(View.VISIBLE);
         this.mRotatePanel.setVisibility(View.GONE);
         activity.bannerFlipper.showPrevious();
+        activity.isApply = false;
     }
 
     /**
@@ -145,6 +147,7 @@ public class RotateFragment extends BaseEditFragment {
         } else {// 保存图片
             SaveRotateImageTask task = new SaveRotateImageTask();
             task.execute(activity.getMainBit());
+
         }// end if
     }
 

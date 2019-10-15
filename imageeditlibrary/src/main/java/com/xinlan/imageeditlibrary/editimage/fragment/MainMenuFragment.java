@@ -50,13 +50,13 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        stickerBtn = mainView.findViewById(R.id.btn_stickers);
+        stickerBtn = mainView.findViewById(R.id.ll_sticker);
 //        fliterBtn = mainView.findViewById(R.id.btn_filter);
-        cropBtn = mainView.findViewById(R.id.btn_crop);
-        rotateBtn = mainView.findViewById(R.id.btn_rotate);
-        mTextBtn = mainView.findViewById(R.id.btn_text);
-        mPaintBtn = mainView.findViewById(R.id.btn_paint);
-        mBeautyBtn = mainView.findViewById(R.id.btn_beauty);
+        cropBtn = mainView.findViewById(R.id.ll_crop);
+        rotateBtn = mainView.findViewById(R.id.ll_rotate);
+        mTextBtn = mainView.findViewById(R.id.ll_text);
+        mPaintBtn = mainView.findViewById(R.id.ll_paint);
+        mBeautyBtn = mainView.findViewById(R.id.ll_beauty);
 
         stickerBtn.setOnClickListener(this);
 //        fliterBtn.setOnClickListener(this);
@@ -104,6 +104,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     private void onStickClick() {
         activity.bottomGallery.setCurrentItem(StickerFragment.INDEX);
         activity.mStickerFragment.onShow();
+        activity.isApply = true;
     }
 
     /**
@@ -114,6 +115,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     private void onFilterClick() {
         activity.bottomGallery.setCurrentItem(FilterListFragment.INDEX);
         activity.mFilterListFragment.onShow();
+        activity.isApply = true;
     }
 
     /**
@@ -124,6 +126,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     private void onCropClick() {
         activity.bottomGallery.setCurrentItem(CropFragment.INDEX);
         activity.mCropFragment.onShow();
+        activity.isApply = true;
     }
 
     /**
@@ -134,6 +137,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     private void onRotateClick() {
         activity.bottomGallery.setCurrentItem(RotateFragment.INDEX);
         activity.mRotateFragment.onShow();
+        activity.isApply = true;
     }
 
     /**
@@ -144,6 +148,7 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     private void onAddTextClick() {
         activity.bottomGallery.setCurrentItem(AddTextFragment.INDEX);
         activity.mAddTextFragment.onShow();
+        activity.isApply = true;
     }
 
     /**
@@ -152,11 +157,13 @@ public class MainMenuFragment extends BaseEditFragment implements View.OnClickLi
     private void onPaintClick() {
         activity.bottomGallery.setCurrentItem(PaintFragment.INDEX);
         activity.mPaintFragment.onShow();
+        activity.isApply = true;
     }
 
     private void onBeautyClick() {
         activity.bottomGallery.setCurrentItem(BeautyFragment.INDEX);
         activity.mBeautyFragment.onShow();
+        activity.isApply = true;
     }
 
 }// end class

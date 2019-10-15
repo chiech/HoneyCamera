@@ -122,6 +122,7 @@ public class StickerFragment extends BaseEditFragment {
         activity.mStickerFragment.getmStickerView().setVisibility(
                 View.VISIBLE);
         activity.bannerFlipper.showNext();
+        activity.isApply = true;
     }
 
     //导入贴图数据
@@ -253,6 +254,7 @@ public class StickerFragment extends BaseEditFragment {
         activity.bottomGallery.setCurrentItem(0);
         mStickerView.setVisibility(View.GONE);
         activity.bannerFlipper.showPrevious();
+        activity.isApply = false;
     }
 
     /**

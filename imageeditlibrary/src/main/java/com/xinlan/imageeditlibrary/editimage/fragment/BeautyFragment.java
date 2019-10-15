@@ -133,6 +133,7 @@ public class BeautyFragment extends BaseEditFragment implements SeekBar.OnSeekBa
         activity.mainImage.setVisibility(View.VISIBLE);
         activity.mainImage.setScaleEnabled(true);
         activity.bannerFlipper.showPrevious();
+        activity.isApply = false;
     }
 
     @Override
@@ -142,11 +143,13 @@ public class BeautyFragment extends BaseEditFragment implements SeekBar.OnSeekBa
         activity.mainImage.setDisplayType(ImageViewTouchBase.DisplayType.FIT_TO_SCREEN);
         activity.mainImage.setScaleEnabled(false);
         activity.bannerFlipper.showNext();
+        activity.isApply = true;
     }
 
     public void applyBeauty() {
         if (mResultBitmapRef.get() != null && (mSmooth != 0 || mWhiteSkin != 0)) {
             activity.changeMainBitmap(mResultBitmapRef.get(),true);
+
         }
 
         backToMain();

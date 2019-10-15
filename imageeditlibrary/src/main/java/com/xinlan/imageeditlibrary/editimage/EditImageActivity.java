@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -106,6 +107,9 @@ public class EditImageActivity extends BaseActivity {
     public PaintFragment mPaintFragment;//绘制模式Fragment
     public BeautyFragment mBeautyFragment;//美颜模式Fragment
     private SaveImageTask mSaveImageTask;
+    public boolean isApply = false;
+
+    private LinearLayout linearLayout;
 
     private RedoUndoController mRedoUndoController;//撤销操作
 
@@ -162,6 +166,53 @@ public class EditImageActivity extends BaseActivity {
         applyBtn.setOnClickListener(new ApplyBtnClick());
         saveBtn = findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(new SaveBtnClick());
+        ImageView iv_save = (ImageView)findViewById(R.id.iv_save);
+        iv_save.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (isApply){
+                    switch (mode) {
+                        case MODE_STICKERS:
+                            mStickerFragment.applyStickers();// 保存贴图
+                            break;
+                        case MODE_FILTER:// 滤镜编辑状态
+                            mFilterListFragment.applyFilterImage();// 保存滤镜贴图
+                            break;
+                        case MODE_CROP:// 剪切图片保存
+                            mCropFragment.applyCropImage();
+                            break;
+                        case MODE_ROTATE:// 旋转图片保存
+                            mRotateFragment.applyRotateImage();
+                            break;
+                        case MODE_TEXT://文字贴图 图片保存
+                            mAddTextFragment.applyTextImage();
+                            break;
+                        case MODE_PAINT://保存涂鸦
+                            mPaintFragment.savePaintImage();
+                            break;
+                        case MODE_BEAUTY://保存美颜后的图片
+                            mBeautyFragment.applyBeauty();
+                            break;
+                        default:
+                            break;
+                    }// end switch
+                }else {
+                    if (mOpTimes == 0) {//并未修改图片
+                        onSaveTaskDone();
+                    } else {
+                        doSaveImage();
+                    }
+                }
+            }
+        });
+        ImageView iv_cancel = (ImageView)findViewById(R.id.iv_cancel);
+        iv_cancel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         mainImage = (ImageViewTouch) findViewById(R.id.main_image);
         backBtn = findViewById(R.id.back_btn);// 退出按钮
@@ -177,7 +228,6 @@ public class EditImageActivity extends BaseActivity {
         mRotatePanel = (RotateImageView) findViewById(R.id.rotate_panel);
         mTextStickerView = (TextStickerView) findViewById(R.id.text_sticker_panel);
         mPaintView = (CustomPaintView) findViewById(R.id.custom_paint_view);
-        final ImageView editimage = (ImageView) findViewById(R.id.im_edit);
 
         // 底部gallery
         bottomGallery = (CustomViewPager) findViewById(R.id.bottom_gallery);
@@ -269,6 +319,8 @@ public class EditImageActivity extends BaseActivity {
         mLoadImageTask.execute(filepath);
     }
 
+
+
     /**
      * 导入文件图片任务
      */
@@ -330,6 +382,8 @@ public class EditImageActivity extends BaseActivity {
             alertDialog.show();
         }
     }
+
+
 
     /**
      * 应用按钮点击

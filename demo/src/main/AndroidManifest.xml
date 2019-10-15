@@ -36,6 +36,8 @@
             android:windowSoftInputMode="adjustPan">
         </activity>
 
+        <activity android:name=".MidActivity"></activity>
+
     </application>
 
 </manifest>

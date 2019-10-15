@@ -119,9 +119,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.take_photo:
                 takePhotoClick();
+//                startActivity(new Intent(MainActivity.this,MidActivity.class));
                 break;
             case R.id.select_ablum:
-                selectFromAblum(0);
+                selectFromAblum();
 //                MODE = 0;
                 break;
         }//end switch
@@ -183,61 +184,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      *
      * @author panyi
      */
-    private void editImageClick(int id) {
+    private void editImageClick() {
         File outputFile = FileUtils.genEditFile();
         EditImageActivity.start(this, path, outputFile.getAbsolutePath(), ACTION_REQUEST_EDITIMAGE, MODE);
-        Log.d(TAG, "editImageClick: id is " + id);
     }
 
     /**
      * 从相册选择编辑图片
      */
-    private void selectFromAblum(int id) {
+    private void selectFromAblum() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             openAblumWithPermissionsCheck();
         } else {
-            switch (id) {
-                case 0:
-                    openAblum(0);
-                    break;
-                case 2:
-                    openAblum(2);
-                    break;
-                case 7:
-                    openAblum(7);
-                    break;
-                case 5:
-                    openAblum(5);
-                    break;
-            }
+                    openAblum();
         }//end if
-        Log.d(TAG, "selectFromAblum: id is " + id);
     }
 
-    private void openAblum(int id) {
-        switch (id) {
-            case 0:
+    private void openAblum() {
                 MainActivity.this.startActivityForResult(new Intent(
                                 MainActivity.this, SelectPictureActivity.class),
                         SELECT_GALLERY_IMAGE_CODE);
-                break;
-            case 2:
-                MainActivity.this.startActivityForResult(new Intent(
-                                MainActivity.this, SelectPictureActivity.class),
-                        Filter);
-                break;
-            case 7:
-                MainActivity.this.startActivityForResult(new Intent(
-                                MainActivity.this, SelectPictureActivity.class),
-                        Magic);
-                break;
-            case 5:
-                MainActivity.this.startActivityForResult(new Intent(
-                                MainActivity.this, SelectPictureActivity.class),
-                        Font);
-                break;
-        }
-        Log.d(TAG, "openAblum: id is " + id);
     }
 
     private void openAblumWithPermissionsCheck() {
@@ -248,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     REQUEST_PERMISSON_SORAGE);
             return;
         }
-        openAblum(0);
+        openAblum();
     }
 
     @Override
@@ -256,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == REQUEST_PERMISSON_SORAGE
                 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            openAblum(0);
+            openAblum();
             return;
         }//end if
 
@@ -277,28 +243,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case SELECT_GALLERY_IMAGE_CODE://
                     String filepath = data.getStringExtra("imgPath");
                     path = filepath;
-                    editImageClick(0);
-                    break;
-                case Filter:
-                    String filepath1 = data.getStringExtra("imgPath");
-                    path = filepath1;
-                    editImageClick(2);
-                    break;
-                case Magic:
-                    String filepath2 = data.getStringExtra("imgPath");
-                    path = filepath2;
-                    editImageClick(7);
-                    break;
-                case Font:
-                    String filepath3 = data.getStringExtra("imgPath");
-                    path = filepath3;
-                    editImageClick(5);
+                    editImageClick();
                     break;
                 case TAKE_PHOTO_CODE://拍照返回
                     if (photoURI != null) {
                         path = photoURI.getPath();
                     }
-                    editImageClick(0);
+                    editImageClick();
                     break;
                 case ACTION_REQUEST_EDITIMAGE://
 //                    handleEditorImage(data);

@@ -9,8 +9,8 @@
 
     <FrameLayout
         android:id="@+id/work_space"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#000000">
 
         <com.xinlan.imageeditlibrary.editimage.view.imagezoom.ImageViewTouch
@@ -70,117 +70,80 @@
             android:layout_marginLeft="0dp"
             android:src="@drawable/back_btn"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:src="@drawable/cancel_btn"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:src="@drawable/save_btn"/>
-
-
-
-        <ViewFlipper
-            android:id="@+id/banner_flipper"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"
-            android:flipInterval="1000"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/save_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:gravity="center"
-                android:text="@string/save"
-                android:textStyle="bold"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/apply"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:gravity="center"
-                android:text="@string/apply"
-                android:textColor="#ffffff"
-                android:textSize="20sp" />
-        </ViewFlipper>
-    </LinearLayout>
-
-    <HorizontalScrollView
-        android:id="@+id/hscrollview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:alpha="0.7"
-        android:layout_marginTop="600dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:gravity="end">
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/iv_cancel"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="55dp"
+                android:src="@drawable/cancel_btn"/>
 
-                <ImageView
-                    android:id="@+id/im_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/edit_btn2"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/texture_btn2"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/crop_btn2"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/rotate_btn2"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/text_btn2"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/beauty_btn2"/>
-            </LinearLayout>
-
-            <LinearLayout
+            <ImageView
+                android:id="@+id/iv_save"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="55dp"
+                android:src="@drawable/save_btn"/>
 
 
-            </LinearLayout>
+            <ViewFlipper
+                android:id="@+id/banner_flipper"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:flipInterval="1000"
+                android:gravity="center">
 
+                <TextView
+                    android:id="@+id/save_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/save"
+                    android:textStyle="bold"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/apply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/apply"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+            </ViewFlipper>
         </LinearLayout>
 
 
+    </LinearLayout>
 
-    </HorizontalScrollView>
 
-    <com.xinlan.imageeditlibrary.editimage.view.CustomViewPager
-        android:id="@+id/bottom_gallery"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/bottom_banner_height"
-        android:layout_marginTop="650dp"
-        android:background="@drawable/view_pager"
-        android:alpha="0.7"
-        android:overScrollMode="never" />
+
+
+
+
+
+
+                <com.xinlan.imageeditlibrary.editimage.view.CustomViewPager
+                    android:id="@+id/bottom_gallery"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="550dp"
+                    android:background="@drawable/view_pager"
+                    android:alpha="0.7"
+                    android:layout_height="150dp"
+                    android:overScrollMode="never" />
+
+
+
+
+
+
 
     <LinearLayout
         android:id="@+id/redo_uodo_panel"
@@ -188,7 +151,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="350dp"
-        android:layout_marginTop="600dp">
+        android:layout_marginTop="530dp">
         <ImageView
             android:id="@+id/uodo_btn"
             android:layout_width="wrap_content"
