@@ -65,9 +65,8 @@
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
-            android:layout_gravity="left|center_vertical"
+            android:layout_gravity="start|center_vertical"
             android:layout_margin="10dp"
-            android:layout_marginLeft="0dp"
             android:src="@drawable/back_btn"/>
 
 
@@ -77,17 +76,25 @@
             android:layout_weight="1"
             android:gravity="end">
 
-            <ImageView
-                android:id="@+id/iv_cancel"
+            <LinearLayout
+                android:id="@+id/redo_uodo_panel"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
-                android:src="@drawable/cancel_btn"/>
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/iv_save"
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
-                android:src="@drawable/save_btn"/>
+                <ImageView
+                    android:id="@+id/uodo_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/cancel_btn" />
+                <ImageView
+                    android:id="@+id/redo_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cancel_btn2" />
+            </LinearLayout>
 
 
             <ViewFlipper
@@ -99,24 +106,19 @@
                 android:flipInterval="1000"
                 android:gravity="center">
 
-                <TextView
+                <ImageView
                     android:id="@+id/save_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/save"
-                    android:textStyle="bold"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
+                    android:src="@drawable/save_btn"/>
 
-                <TextView
+                <ImageView
                     android:id="@+id/apply"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:gravity="center"
-                    android:text="@string/apply"
-                    android:textColor="#ffffff"
-                    android:textSize="20sp" />
+                    android:src="@drawable/save_ok_btn"/>
             </ViewFlipper>
         </LinearLayout>
 
@@ -133,10 +135,10 @@
                 <com.xinlan.imageeditlibrary.editimage.view.CustomViewPager
                     android:id="@+id/bottom_gallery"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="550dp"
                     android:background="@drawable/view_pager"
+                    android:layout_gravity="bottom"
                     android:alpha="0.7"
-                    android:layout_height="150dp"
+                    android:layout_height="120dp"
                     android:overScrollMode="never" />
 
 
@@ -145,24 +147,6 @@
 
 
 
-    <LinearLayout
-        android:id="@+id/redo_uodo_panel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="350dp"
-        android:layout_marginTop="530dp">
-        <ImageView
-            android:id="@+id/uodo_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/uodo" />
-        <ImageView
-            android:id="@+id/redo_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/redo" />
-    </LinearLayout>
+
 
 </FrameLayout>

@@ -17,6 +17,7 @@
         android:layout_weight="1"
         android:hint="@string/input_hint"
         android:paddingLeft="8dp"
+        android:singleLine="true"
         android:textColor="@color/white"
         android:textColorHint="@color/white"/>
 

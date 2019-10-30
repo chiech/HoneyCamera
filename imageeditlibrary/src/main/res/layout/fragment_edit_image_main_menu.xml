@@ -43,6 +43,7 @@
             android:id="@+id/ll_sticker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center"
             android:orientation="vertical">
 
@@ -81,6 +82,7 @@
             android:id="@+id/ll_crop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical"
             android:layout_gravity="center">
 
@@ -109,6 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <ImageView
@@ -136,6 +139,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <ImageView
@@ -163,6 +167,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
             android:orientation="vertical">
 
             <ImageView

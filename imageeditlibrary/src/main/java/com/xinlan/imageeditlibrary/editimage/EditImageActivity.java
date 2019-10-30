@@ -156,8 +156,8 @@ public class EditImageActivity extends BaseActivity {
     private void initView() {
         mContext = this;
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-        imageWidth = metrics.widthPixels / 2;
-        imageHeight = metrics.heightPixels / 2;
+        imageWidth = metrics.widthPixels;
+        imageHeight = metrics.heightPixels;
 
         bannerFlipper = (ViewFlipper) findViewById(R.id.banner_flipper);
         bannerFlipper.setInAnimation(this, R.anim.in_bottom_to_top);
@@ -166,53 +166,6 @@ public class EditImageActivity extends BaseActivity {
         applyBtn.setOnClickListener(new ApplyBtnClick());
         saveBtn = findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(new SaveBtnClick());
-        ImageView iv_save = (ImageView)findViewById(R.id.iv_save);
-        iv_save.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (isApply){
-                    switch (mode) {
-                        case MODE_STICKERS:
-                            mStickerFragment.applyStickers();// 保存贴图
-                            break;
-                        case MODE_FILTER:// 滤镜编辑状态
-                            mFilterListFragment.applyFilterImage();// 保存滤镜贴图
-                            break;
-                        case MODE_CROP:// 剪切图片保存
-                            mCropFragment.applyCropImage();
-                            break;
-                        case MODE_ROTATE:// 旋转图片保存
-                            mRotateFragment.applyRotateImage();
-                            break;
-                        case MODE_TEXT://文字贴图 图片保存
-                            mAddTextFragment.applyTextImage();
-                            break;
-                        case MODE_PAINT://保存涂鸦
-                            mPaintFragment.savePaintImage();
-                            break;
-                        case MODE_BEAUTY://保存美颜后的图片
-                            mBeautyFragment.applyBeauty();
-                            break;
-                        default:
-                            break;
-                    }// end switch
-                }else {
-                    if (mOpTimes == 0) {//并未修改图片
-                        onSaveTaskDone();
-                    } else {
-                        doSaveImage();
-                    }
-                }
-            }
-        });
-        ImageView iv_cancel = (ImageView)findViewById(R.id.iv_cancel);
-        iv_cancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
 
         mainImage = (ImageViewTouch) findViewById(R.id.main_image);
         backBtn = findViewById(R.id.back_btn);// 退出按钮
@@ -420,6 +373,14 @@ public class EditImageActivity extends BaseActivity {
             }// end switch
         }
     }// end inner class
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        Intent intent = new Intent(EditImageActivity.this,MainAcitivity.class);
+//        intent.putExtra("code",1);
+//        startActivity(intent);
+    }
 
     /**
      * 保存按钮 点击退出

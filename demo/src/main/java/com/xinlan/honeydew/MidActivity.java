@@ -1,4 +1,4 @@
-package com.xinlan.honey;
+package com.xinlan.honeydew;
 
 import android.Manifest;
 import android.content.Intent;
@@ -11,7 +11,6 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 
 import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
 
@@ -37,6 +36,18 @@ public class MidActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        takePhotoClick();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
     private void initPhotoError() {
         // android 7.0系统解决拍照的问题
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -48,7 +59,7 @@ public class MidActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestTakePhotoPermissions();
         } else {
-            doTakePhoto();
+            TakePhoto();
         }//end if
     }
 
@@ -63,13 +74,13 @@ public class MidActivity extends AppCompatActivity {
                     REQUEST_PERMISSON_CAMERA);
             return;
         }
-        doTakePhoto();
+        TakePhoto();
     }
 
     /**
      * 拍摄照片
      */
-    private void doTakePhoto() {
+    private void TakePhoto() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = FileUtils.genEditFile();

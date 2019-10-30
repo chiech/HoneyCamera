@@ -14,15 +14,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="150dp"
         android:src="@mipmap/photo_btn" />
 
     <ImageView
         android:id="@+id/select_ablum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="200dp"
+        android:layout_gravity="center|bottom"
+        android:layout_marginTop="250dp"
         android:src="@mipmap/album_btn" />
 
 

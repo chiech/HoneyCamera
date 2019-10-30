@@ -1,4 +1,4 @@
-package com.xinlan.honey;
+package com.xinlan.honeydew;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -27,14 +27,13 @@ import com.bumptech.glide.Glide;
 import com.xinlan.imageeditlibrary.editimage.EditImageActivity;
 import com.xinlan.imageeditlibrary.editimage.utils.BitmapUtils;
 import com.xinlan.imageeditlibrary.picchooser.SelectPictureActivity;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
 
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 import cn.bingoogolapple.bgabanner.BGALocalImageSize;
@@ -46,13 +45,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final int SELECT_GALLERY_IMAGE_CODE = 7;
     public static final int TAKE_PHOTO_CODE = 8;
     public static final int ACTION_REQUEST_EDITIMAGE = 9;
-    public static final int ACTION_STICKERS_IMAGE = 10;
-    public static final int Filter = 11;
-    public static final int Magic = 12;
-    public static final int Font = 13;
     private MainActivity context;
     private ImageView imgView;
-    private View openAblum;
+    private View OpenPhoto;
     private View editImage;//
     private Bitmap mainBitmap;
     private int imageWidth, imageHeight;//
@@ -63,7 +58,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Uri photoURI = null;
     private static final String TAG = "MainActivity";
     private int MODE = 0;
-    private Integer[] images= {R.mipmap.home_banner1,R.mipmap.home_banner2,R.mipmap.home_banner3};
+    //首页图片资源文件
+    private Integer[] images= {R.mipmap.home_banner1,R.mipmap.home_banner2,R.mipmap.home_banner3,R.mipmap.home_banner4,
+            R.mipmap.home_banner5,
+            R.mipmap.home_banner6,
+            R.mipmap.home_banner7,
+            R.mipmap.home_banner8,
+            R.mipmap.home_banner9,
+            R.mipmap.home_banner10,
+            R.mipmap.home_banner11,
+            R.mipmap.home_banner12,
+            R.mipmap.home_banner13};
     private List<Integer[]> list = new ArrayList<Integer[]>();
 
     @Override
@@ -76,21 +81,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initPhotoError();
     }
 
-    private void initPhotoError() {
-        // android 7.0系统解决拍照的问题
-        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-        StrictMode.setVmPolicy(builder.build());
-        builder.detectFileUriExposure();
-    }
-
     private void initView() {
         context = this;
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         imageWidth = metrics.widthPixels;
         imageHeight = metrics.heightPixels;
 
-        openAblum = findViewById(R.id.select_ablum);
-        openAblum.setOnClickListener(this);
+        OpenPhoto = findViewById(R.id.select_ablum);
+        OpenPhoto.setOnClickListener(this);
         mTakenPhoto = findViewById(R.id.take_photo);
         mTakenPhoto.setOnClickListener(this);
 
@@ -98,19 +96,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bgaBanner = (BGABanner) findViewById(R.id.main_banner);
 
-//        bgaBanner.setBannerStyle(BannerConfig.NOT_INDICATOR)
-//                .setImageLoader(new GlideImageLoader())
-//                .setImages(list)
-//                .start();
-//
-//
         BGALocalImageSize bgaLocalImageSize = new BGALocalImageSize(720, 1280, 320, 640);
-        bgaBanner.setData(bgaLocalImageSize, ImageView.ScaleType.CENTER_CROP,
-                R.mipmap.home_banner1,
-                R.mipmap.home_banner2,
-                R.mipmap.home_banner3);
+        Random random = new Random();
+        int i = random.nextInt(12);
+        bgaBanner.setData(bgaLocalImageSize,null,images[i]);//随机在资源中选一页显示
+        bgaBanner.setIsNeedShowIndicatorOnOnlyOnePage(false);//只有一页时不显示小圆点
 
+    }
 
+    private void initPhotoError() {
+        // android 7.0系统解决拍照的问题
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
     }
 
 
@@ -119,22 +117,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.take_photo:
                 takePhotoClick();
-//                startActivity(new Intent(MainActivity.this,MidActivity.class));
                 break;
             case R.id.select_ablum:
                 selectFromAblum();
-//                MODE = 0;
                 break;
         }//end switch
     }
 
-    public class GlideImageLoader extends ImageLoader{
-
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
-            Glide.with(context).load(path).into(imageView);
-        }
-    }
 
     /**
      * 拍摄照片
@@ -143,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestTakePhotoPermissions();
         } else {
-            doTakePhoto();
+            TakePhoto();
         }//end if
     }
 
@@ -158,13 +147,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     REQUEST_PERMISSON_CAMERA);
             return;
         }
-        doTakePhoto();
+        TakePhoto();
     }
 
     /**
      * 拍摄照片
      */
-    private void doTakePhoto() {
+    private void TakePhoto() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
             File photoFile = FileUtils.genEditFile();
@@ -194,19 +183,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void selectFromAblum() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            openAblumWithPermissionsCheck();
+            OpenPhotoWithPermissionsCheck();
         } else {
-                    openAblum();
+                    OpenPhoto();
         }//end if
     }
 
-    private void openAblum() {
+    private void OpenPhoto() {
                 MainActivity.this.startActivityForResult(new Intent(
                                 MainActivity.this, SelectPictureActivity.class),
                         SELECT_GALLERY_IMAGE_CODE);
     }
 
-    private void openAblumWithPermissionsCheck() {
+    private void OpenPhotoWithPermissionsCheck() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -214,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     REQUEST_PERMISSON_SORAGE);
             return;
         }
-        openAblum();
+        OpenPhoto();
     }
 
     @Override
@@ -222,14 +211,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == REQUEST_PERMISSON_SORAGE
                 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            openAblum();
+            OpenPhoto();
             return;
         }//end if
 
         if (requestCode == REQUEST_PERMISSON_CAMERA
                 && grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            doTakePhoto();
+            TakePhoto();
             return;
         }//end if
     }
@@ -251,110 +240,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     editImageClick();
                     break;
-                case ACTION_REQUEST_EDITIMAGE://
-//                    handleEditorImage(data);
-                    break;
             }// end switch
         }
         Log.d(TAG, "onActivityResult: requesetcode is " + requestCode);
     }
 
-    /**
-     * 处理拍照返回
-     *
-     * @param data
-     */
 
-    private void handleEditorImage(Intent data) {
-        String newFilePath = data.getStringExtra(EditImageActivity.EXTRA_OUTPUT);
-        boolean isImageEdit = data.getBooleanExtra(EditImageActivity.IMAGE_IS_EDIT, false);
-
-        if (isImageEdit) {
-            Toast.makeText(this, getString(R.string.save_path, newFilePath), Toast.LENGTH_LONG).show();
-        } else {//未编辑  还是用原来的图片
-            newFilePath = data.getStringExtra(EditImageActivity.FILE_PATH);
-            ;
-        }
-        //System.out.println("newFilePath---->" + newFilePath);
-        //File file = new File(newFilePath);
-        //System.out.println("newFilePath size ---->" + (file.length() / 1024)+"KB");
-        Log.d("image is edit", isImageEdit + "");
-        LoadImageTask loadTask = new LoadImageTask();
-        loadTask.execute(newFilePath);
-    }
-
-    private void handleSelectFromAblum(Intent data) {
-        String filepath = data.getStringExtra("imgPath");
-        path = filepath;
-        // System.out.println("path---->"+path);
-        startLoadTask();
-    }
-
-    private void startLoadTask() {
-        LoadImageTask task = new LoadImageTask();
-        task.execute(path);
-    }
-
-//    @Override
-//    public void onMessage(String tag, String content) {
-//
-//    }
-//
-//    @Override
-//    public void onError(Throwable throwable) {
-//
-//    }
-
-
-    private final class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            return BitmapUtils.getSampledBitmap(params[0], imageWidth / 4, imageHeight / 4);
-        }
-
-        @Override
-        protected void onCancelled() {
-            super.onCancelled();
-        }
-
-        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-        @Override
-        protected void onCancelled(Bitmap result) {
-            super.onCancelled(result);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            super.onPostExecute(result);
-            if (mainBitmap != null) {
-                mainBitmap.recycle();
-                mainBitmap = null;
-                System.gc();
-            }
-            mainBitmap = result;
-//            imgView.setImageBitmap(mainBitmap);
-//            editImageClick();
-
-        }
-    }// end inner class
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        Plugin.call();
-//        banner.startAutoPlay();
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-//        banner.stopAutoPlay();
-    }
 }//end class

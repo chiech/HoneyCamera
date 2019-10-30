@@ -5,11 +5,11 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        applicationId "com.xinlan.honey"
+        applicationId "com.xinlan.honeydew"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 25
-        versionName "1.0.25"
+        versionName "1.0.1"
     }
     buildTypes {
         release {
@@ -23,10 +23,10 @@ android {
                 output->
                     def outputFile=output.outputFile
                     if (outputFile!=null && outputFile.name.contains('release')){
-                        def  fileName="honey-release_v${variant.versionName}.apk"
+                        def  fileName="honeydew-release_v${variant.versionName}.apk"
                         outputFileName=fileName
                     }else if (outputFile!=null && outputFile.name.contains('debug')){
-                        def  fileName="honey-debug_v${variant.versionName}.apk"
+                        def  fileName="honeydew-debug_v${variant.versionName}.apk"
                         outputFileName=fileName
                     }
             }

@@ -127,5 +127,6 @@
     <orderEntry type="library" name="Gradle: com.youth.banner:banner:1.4.10@aar" level="project" />
     <orderEntry type="module" module-name="imageeditlibrary" />
     <orderEntry type="module" module-name="imageeditlibrary" />
+    <orderEntry type="module" module-name="imageeditlibrary" />
   </component>
 </module>
